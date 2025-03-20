@@ -1,4 +1,4 @@
-export type Anime = {
+export type Question = {
   id: string;
   index: string;
   title: string;

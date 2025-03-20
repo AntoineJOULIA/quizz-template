@@ -1,9 +1,9 @@
 "use client";
 
-import { useAnimeStatus } from "@/hooks/useAnimeStatus";
+import { useQuestionStatus } from "@/hooks/useQuestionStatus";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-import { getAnimes } from "@/lib/db";
+import { getQuestions } from "@/lib/db";
 import { useEffect, useState } from "react";
 
 export function ResumeGameButton() {
@@ -11,16 +11,16 @@ export function ResumeGameButton() {
   const router = useRouter();
 
   useEffect(() => {
-    const started = window.localStorage.getItem("anime-quizz.status") !== null;
+    const started = window.localStorage.getItem("quizz.status") !== null;
     setAlreadyStarted(started);
   }, []);
 
-  const [animeStatus] = useAnimeStatus();
-  const allAnimes = getAnimes();
+  const [questionStatus] = useQuestionStatus();
+  const allQuestions = getQuestions();
 
   function getFirstUnresolvedIndex() {
-    const firstUnresolvedAnime = allAnimes.find((anime) => animeStatus[anime.id] !== "correct");
-    const firstUnresolvedIndex = firstUnresolvedAnime?.index ?? 1;
+    const firstUnresolvedQuestion = allQuestions.find((question) => questionStatus[question.id] !== "correct");
+    const firstUnresolvedIndex = firstUnresolvedQuestion?.index ?? 1;
     return firstUnresolvedIndex.toString();
   }
 
@@ -37,7 +37,7 @@ export function ResumeGameButton() {
           <path d="M5 3c-.545 0-1 .455-1 1 0 .545.455 1 1 1h8c.545 0 1-.455 1-1 0-.545-.455-1-1-1H5zm13 0a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1zm0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1zM4 9c-.554 0-1 .446-1 1s.446 1 1 1h2c.554 0 1-.446 1-1s-.446-1-1-1H4zm13 0c-.554 0-1 .446-1 1s.446 1 1 1h2c.554 0 1-.446 1-1s-.446-1-1-1h-2z" />
         </g>
       </svg>
-      Continuer
+      Resume
     </Button>
   );
 }

@@ -1,8 +1,8 @@
 import { AnswerBoard } from "@/components/answers-board";
-import { getAnimes } from "@/lib/db";
+import { getQuestions } from "@/lib/db";
 
 export default function BoardPage() {
-  const animes = getAnimes();
+  const questions = getQuestions();
 
-  return <AnswerBoard animes={animes} />;
+  return <AnswerBoard questions={questions} />;
 }

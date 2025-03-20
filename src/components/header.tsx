@@ -7,7 +7,7 @@ export function Header() {
         <ul className="flex gap-8 justify-center items-center">
           <li>
             <Link className="text-xl md:text-2xl lg:text-3xl p-4 hover:text-primary" href="/">
-              Accueil
+              Home
             </Link>
           </li>
           <li>

@@ -11,17 +11,17 @@
 import AnswerForm from "@/components/answer-form";
 import { ImageToggle } from "@/components/image-toggle";
 import { COLORS } from "@/lib/constants";
-import { getAnime, getAnimes } from "@/lib/db";
+import { getQuestion, getQuestions } from "@/lib/db";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 // Return a list of `params` to populate the [id] dynamic segment
 export async function generateStaticParams() {
-  const animes = getAnimes();
+  const questions = getQuestions();
 
-  return animes.map((anime) => ({
-    index: anime.index,
+  return questions.map((question) => ({
+    index: question.index,
   }));
 }
 
@@ -34,8 +34,8 @@ function randomTextColor() {
 export default async function QuizzPage({ params }: { params: Promise<{ index: string }> }) {
   const { index } = await params;
 
-  const anime = getAnime(index);
-  if (!anime) {
+  const question = getQuestion(index);
+  if (!question) {
     notFound();
   }
 
@@ -45,10 +45,10 @@ export default async function QuizzPage({ params }: { params: Promise<{ index: s
   return (
     <div className="p-2 grid grid-cols-2 md:grid-cols-[90px_3fr_2fr_90px] gap-4 md:gap-x-10 xl:gap-x-20 md:gap-y-4">
       <p className={`md:col-start-2 md:col-span-3 text-4xl md:text-6xl font-black ${randomTextColor()}`}>
-        {anime.index.toString().padStart(3, "0")}
+        {question.index.toString().padStart(3, "0")}
       </p>
-      <ImageToggle anime={anime} />
-      <AnswerForm anime={anime} />
+      <ImageToggle question={question} />
+      <AnswerForm question={question} />
 
       {prevId > 0 ? (
         <Link
@@ -61,7 +61,7 @@ export default async function QuizzPage({ params }: { params: Promise<{ index: s
       ) : (
         <div className="md:col-start-1 md:row-start-2"></div>
       )}
-      {nextId <= getAnimes().length ? (
+      {nextId <= getQuestions().length ? (
         <Link
           href={`/${nextId}`}
           className="start-4 self-stretch flex justify-center items-center border border-accent md:border-none hover:bg-accent rounded-lg p-4"

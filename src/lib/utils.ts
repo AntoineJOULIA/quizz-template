@@ -1,4 +1,4 @@
-import { Anime } from "@/types";
+import { Question } from "@/types";
 import { clsx } from "clsx";
 import type { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -30,8 +30,8 @@ export function imagePrefix() {
   return process.env.NODE_ENV !== "production" ? "/" : "";
 }
 
-export function checkAnswer(anime: Anime, answer: string) {
-  const success = anime.acceptedAnswers.some((acceptedAnswer) => {
+export function checkAnswer(question: Question, answer: string) {
+  const success = question.acceptedAnswers.some((acceptedAnswer) => {
     console.log(normalize(acceptedAnswer), "/", normalize(answer));
     return normalize(acceptedAnswer) === normalize(answer);
   });
