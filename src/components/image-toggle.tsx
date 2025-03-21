@@ -19,7 +19,7 @@ export function ImageToggle({ quizzItem }: { quizzItem: QuizzItem }) {
   return (
     <div className="col-span-2 md:col-span-1 md:col-start-2 grid gap-4 place-items-center">
       <Image
-        className="aspect-4/3 object-cover w-full h-96 xl:h-[500px] rounded-lg md:rounded-2xl xl:rounded-[35px]"
+        className="aspect-4/3 object-cover w-full h-96 xl:h-[500px]"
         src={hintType === "easy" ? imagePrefix() + quizzItem.easyHint : imagePrefix() + quizzItem.hardHint}
         width={800}
         height={600}
@@ -28,7 +28,7 @@ export function ImageToggle({ quizzItem }: { quizzItem: QuizzItem }) {
       <div className="flex flex-col md:flex-row gap-4 w-full">
         <Button
           className={cn("text-xl px-8 py-6 grow", {
-            "text-blue-800 hover:text-blue-800 outline-double outline-2 outline-blue-500": hintType === "hard",
+            "text-zinc-800 hover:text-zinc-800 outline-double outline-2 outline-zinc-500": hintType === "hard",
           })}
           size={"lg"}
           variant={"outline"}
@@ -39,7 +39,7 @@ export function ImageToggle({ quizzItem }: { quizzItem: QuizzItem }) {
         </Button>
         <Button
           className={cn("text-xl px-8 py-6 grow", {
-            "text-blue-800 outline-double outline-2 outline-blue-500 hover:text-blue-800": hintType === "easy",
+            "text-zinc-800 outline-double outline-2 outline-zinc-500 hover:text-zinc-800": hintType === "easy",
           })}
           size={"lg"}
           variant={"outline"}

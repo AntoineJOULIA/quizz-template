@@ -6,12 +6,12 @@ export function Header() {
       <nav>
         <ul className="flex gap-8 justify-center items-center">
           <li>
-            <Link className="text-xl md:text-2xl lg:text-3xl p-4 hover:text-primary" href="/">
+            <Link className="text-xl opacity-70 md:text-2xl lg:text-3xl p-4 hover:opacity-100" href="/">
               Home
             </Link>
           </li>
           <li>
-            <Link className="text-xl md:text-2xl lg:text-3xl p-4 hover:text-primary" href="/board">
+            <Link className="text-xl opacity-70 md:text-2xl lg:text-3xl p-4 hover:opacity-100" href="/board">
               Progression
             </Link>
           </li>

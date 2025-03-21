@@ -1,1 +1,2 @@
-export const COLORS: string[] = ["zinc", "red", "rose", "orange", "green", "blue", "yellow", "violet"] as const;
+export const ERROR_PRIMARY_MESSAGES = ["Wrong answer", "Wrong"];
+export const ERROR_SECONDARY_MESSAGES = ["Do your best", "Not that easy, right?"];

@@ -1,16 +1,5 @@
-/* Trick to make dynamic tailwind classes work */
-// text-zinc-500
-// text-red-500
-// text-rose-500
-// text-orange-500
-// text-green-500
-// text-blue-500
-// text-yellow-500
-// text-violet-500
-
 import AnswerForm from "@/components/answer-form";
 import { ImageToggle } from "@/components/image-toggle";
-import { COLORS } from "@/lib/constants";
 import { getQuizzItem, getQuizzItems } from "@/lib/db";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -23,12 +12,6 @@ export async function generateStaticParams() {
   return quizzItems.map((item) => ({
     index: item.index,
   }));
-}
-
-function randomTextColor() {
-  const randomIndex = Math.floor(Math.random() * COLORS.length);
-  const randomColor = COLORS[randomIndex];
-  return `text-${randomColor}-500`;
 }
 
 export default async function QuizzPage({ params }: { params: Promise<{ index: string }> }) {
@@ -44,7 +27,7 @@ export default async function QuizzPage({ params }: { params: Promise<{ index: s
 
   return (
     <div className="p-2 grid grid-cols-2 md:grid-cols-[90px_3fr_2fr_90px] gap-4 md:gap-x-10 xl:gap-x-20 md:gap-y-4">
-      <p className={`md:col-start-2 md:col-span-3 text-4xl md:text-6xl font-black ${randomTextColor()}`}>
+      <p className="md:col-start-2 md:col-span-3 text-4xl md:text-6xl font-black">
         {quizzItem.index.toString().padStart(3, "0")}
       </p>
       <ImageToggle quizzItem={quizzItem} />

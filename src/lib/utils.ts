@@ -2,6 +2,7 @@ import { QuizzItem } from "@/types";
 import { clsx } from "clsx";
 import type { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { ERROR_PRIMARY_MESSAGES, ERROR_SECONDARY_MESSAGES } from "./constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -37,17 +38,6 @@ export function checkAnswer(quizzItem: QuizzItem, answer: string) {
   return success;
 }
 
-const ERROR_PRIMARY_MESSAGES = ["Mauvaise réponse", "Non, ce n'est pas ça", "Raté !", "Perdu !", "Faux !", "Et non !"];
-const ERROR_SECONDARY_MESSAGES = [
-  "Pas facile hein ?",
-  "Tu peux mieux faire",
-  "Presque ! (non, en fait je n'en sais rien)",
-  "Dommage !",
-  "Tu y es presque (ou pas ^^)",
-  "Ce n'est pas grave",
-  "T'es sérieux là ?",
-  "LOL",
-];
 export function errorPrimaryMessage() {
   return ERROR_PRIMARY_MESSAGES[Math.floor(Math.random() * ERROR_PRIMARY_MESSAGES.length)];
 }

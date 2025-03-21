@@ -10,7 +10,7 @@ import { QuizzItem } from "@/types";
 import { checkAnswer, errorPrimaryMessage, errorSecondaryMessage, videoUrlToEmbed } from "@/lib/utils";
 import { useState } from "react";
 import { useQuizzItemStatus } from "@/hooks/useQuizzItemStatus";
-import { Frown, Trophy } from "lucide-react";
+import { Frown, SearchCheck, Trophy } from "lucide-react";
 
 const formSchema = z.object({
   answer: z
@@ -97,6 +97,7 @@ export default function AnswerForm({ quizzItem }: { quizzItem: QuizzItem }) {
             )}
           />
           <Button className="text-xl xl:text-2xl font-bold py-6 xl:py-8" type="submit">
+            <SearchCheck className="size-8 mr-2" />
             Check
           </Button>
         </form>
