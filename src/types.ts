@@ -1,4 +1,4 @@
-export type Question = {
+export type QuizzItem = {
   id: string;
   index: string;
   title: string;

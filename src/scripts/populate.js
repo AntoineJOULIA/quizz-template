@@ -13,7 +13,7 @@ function shuffle(array) {
 }
 
 console.log("Reading input csv file...");
-let data = fs.readFileSync("../data/answers.csv", "utf8");
+let data = fs.readFileSync("../data/quizz-items.csv", "utf8");
 let result = Papa.parse(data, {
   header: true,
 });
@@ -21,47 +21,49 @@ console.log("Parsing done!");
 
 console.log("Converting data...");
 // Add hints, based on id
-const answersWithHints = result.data.map((answer) => {
+const quizzItemsWithHints = result.data.map((item) => {
   return {
-    ...answer,
-    hardHint: `assets/images/${answer.id}-hard.jpg`,
-    easyHint: `assets/images/${answer.id}-easy.jpg`,
+    ...item,
+    hardHint: `assets/images/${item.id}-hard.jpg`,
+    easyHint: `assets/images/${item.id}-easy.jpg`,
   };
 });
 
 // Shuffle array
-const shuffledAnswers = shuffle(answersWithHints);
+const shuffledQuizzItems = shuffle(quizzItemsWithHints);
 
 // Transforms acceptedAnswers string in string[]
-const answersWithConvertedAcceptedAnswers = shuffledAnswers.map((answer) => {
-  if (!answer.acceptedAnswers) return { ...answer, acceptedAnswers: [] };
+const quizzItemsWithConvertedAcceptedAnswers = shuffledQuizzItems.map((item) => {
+  if (!item.acceptedAnswers) return { ...item, acceptedAnswers: [] };
 
-  let answers = answer.acceptedAnswers.split(",");
+  let answers = item.acceptedAnswers.split(",");
   answers = answers.map((val) => val.trim());
   return {
-    ...answer,
+    ...item,
     acceptedAnswers: answers,
   };
 });
 
-const kept = answersWithConvertedAcceptedAnswers.filter((answer) => hasImage(answer.id));
-const rejected = answersWithConvertedAcceptedAnswers.filter((answer) => !hasImage(answer.id));
+const kept = quizzItemsWithConvertedAcceptedAnswers.filter((item) => hasImage(item.id));
+const rejected = quizzItemsWithConvertedAcceptedAnswers.filter((item) => !hasImage(item.id));
 console.log("   > Rejected data", rejected);
 
 // Add index property
-const answers = kept.map((item, index) => {
+const quizzItems = kept.map((item, index) => {
   return {
     ...item,
     index: (index + 1).toString(),
   };
 });
-fs.writeFileSync("../data/answers.json", JSON.stringify(answers), "utf8");
+fs.writeFileSync("../data/quizz-items.json", JSON.stringify(quizzItems), "utf8");
 console.log("Conversion done!");
-console.log(`Dataset contains ${answers.length} answers (vs total of ${answersWithConvertedAcceptedAnswers.length})`);
+console.log(
+  `Dataset contains ${quizzItems.length} quizz items (vs total of ${quizzItemsWithConvertedAcceptedAnswers.length})`
+);
 
 console.log("Creating sample...");
-const sample = answers.slice(0, 10);
-fs.writeFileSync("../data/answers_sample.json", JSON.stringify(sample), "utf8");
+const sample = quizzItems.slice(0, 10);
+fs.writeFileSync("../data/quizz-items_sample.json", JSON.stringify(sample), "utf8");
 console.log("Sample created!");
 
 function hasImage(id) {

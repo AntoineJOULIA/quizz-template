@@ -6,10 +6,10 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Question } from "@/types";
+import { QuizzItem } from "@/types";
 import { checkAnswer, errorPrimaryMessage, errorSecondaryMessage, videoUrlToEmbed } from "@/lib/utils";
 import { useState } from "react";
-import { useQuestionStatus } from "@/hooks/useQuestionStatus";
+import { useQuizzItemStatus } from "@/hooks/useQuizzItemStatus";
 import { Frown, Trophy } from "lucide-react";
 
 const formSchema = z.object({
@@ -19,10 +19,10 @@ const formSchema = z.object({
     .max(50, { message: "Should be less than 50 characters" }),
 });
 
-export default function AnswerForm({ question }: { question: Question }) {
+export default function AnswerForm({ quizzItem }: { quizzItem: QuizzItem }) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [questionStatus, updateStatus] = useQuestionStatus();
+  const [quissItemStatus, updateStatus] = useQuizzItemStatus();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -31,20 +31,20 @@ export default function AnswerForm({ question }: { question: Question }) {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setSubmitted(true);
-    const success = checkAnswer(question, values.answer);
+    const success = checkAnswer(quizzItem, values.answer);
     if (success) {
       setIsSuccess(true);
 
-      if (questionStatus[question.id] === "correct") return;
+      if (quissItemStatus[quizzItem.id] === "correct") return;
 
-      updateStatus(question.id, "correct");
+      updateStatus(quizzItem.id, "correct");
     } else {
       setIsSuccess(false);
-      updateStatus(question.id, "wrong");
+      updateStatus(quizzItem.id, "wrong");
     }
   }
 
-  const isFound = questionStatus[question.id] === "correct" || isSuccess;
+  const isFound = quissItemStatus[quizzItem.id] === "correct" || isSuccess;
 
   if (isFound) {
     return (
@@ -53,12 +53,12 @@ export default function AnswerForm({ question }: { question: Question }) {
           <Trophy className="size-8 md:size-12 text-yellow-500" />
           <p className="text-3xl md:text-5xl font-bold">Congratulations!</p>
         </div>
-        <p className="text-4xl xl:text-7xl font-black">{question.title}</p>
-        {question.videoUrl && (
+        <p className="text-4xl xl:text-7xl font-black">{quizzItem.title}</p>
+        {quizzItem.videoUrl && (
           // https://www.w3schools.com/howto/howto_css_responsive_iframes.asp
           <div className="relative w-full pt-[56.25%]">
             <iframe
-              src={videoUrlToEmbed(question.videoUrl)}
+              src={videoUrlToEmbed(quizzItem.videoUrl)}
               className="absolute inset-0 w-full h-full"
               title="Video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

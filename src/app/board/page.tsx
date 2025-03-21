@@ -1,8 +1,8 @@
 import { AnswerBoard } from "@/components/answers-board";
-import { getQuestions } from "@/lib/db";
+import { getQuizzItems } from "@/lib/db";
 
 export default function BoardPage() {
-  const questions = getQuestions();
+  const quizzItems = getQuizzItems();
 
-  return <AnswerBoard questions={questions} />;
+  return <AnswerBoard quizzItems={quizzItems} />;
 }

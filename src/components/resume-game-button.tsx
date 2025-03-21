@@ -1,9 +1,9 @@
 "use client";
 
-import { useQuestionStatus } from "@/hooks/useQuestionStatus";
+import { useQuizzItemStatus } from "@/hooks/useQuizzItemStatus";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-import { getQuestions } from "@/lib/db";
+import { getQuizzItems } from "@/lib/db";
 import { useEffect, useState } from "react";
 
 export function ResumeGameButton() {
@@ -15,12 +15,12 @@ export function ResumeGameButton() {
     setAlreadyStarted(started);
   }, []);
 
-  const [questionStatus] = useQuestionStatus();
-  const allQuestions = getQuestions();
+  const [quizzItemStatus] = useQuizzItemStatus();
+  const allQuizzItems = getQuizzItems();
 
   function getFirstUnresolvedIndex() {
-    const firstUnresolvedQuestion = allQuestions.find((question) => questionStatus[question.id] !== "correct");
-    const firstUnresolvedIndex = firstUnresolvedQuestion?.index ?? 1;
+    const firstUnresolvedQuizzItem = allQuizzItems.find((item) => quizzItemStatus[item.id] !== "correct");
+    const firstUnresolvedIndex = firstUnresolvedQuizzItem?.index ?? 1;
     return firstUnresolvedIndex.toString();
   }
 
