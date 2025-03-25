@@ -61,7 +61,7 @@ Start the development server:
 npm run dev  # or yarn dev
 ```
 
-The app will be available at: **[http://localhost:3000](http://localhost:3000)**
+The app will be available at: **[http://localhost:3214](http://localhost:3214)**
 
 ## Quick start
 
@@ -71,24 +71,27 @@ You made the template running. Now, you can start creating your own quiz!
 
 The quiz items are loaded from the `quizz-items.json` file located in `src/data`. You can directly edit this file, however, it is easier to fill in the `quizz-items.csv` file, also located in `src/data`. For each item, you need to provide 4 pieces of data:
 
-- the title: it is the intended answer
-- an id: must be unique. It is used to match the images with the quiz item
-- a video url (optional): a video than can be visualized if the answer is correct
-- a list of accepted answers, separated by commas: all the possible answers that should be considered as correct
+- the **title**: it is the intended answer
+- an **id**: must be unique. It is used to match the images with the quiz item
+- a **video url** (optional): a video than can be visualized if the answer is correct
+- a **list of accepted answers**, separated by commas: all the possible answers that should be considered as correct
 
 Here is an example:
 | title | id | videoUrl | acceptedAnswers |
 |---------|----------|---------------------------------------------|------------------------------------------|
 | MacGyver| macgyver | https://www.youtube.com/watch?v=yOEe1uzurKo | macgyver, mac gyver, macgiver, mac giver |
 
-How it looks in the csv file (use `;` as separator):
+How it looks in the csv file:
 
 ```csv
 title;id;videoUrl;acceptedAnswers
 MacGyver;macgyver;https://www.youtube.com/watch?v=yOEe1uzurKo;macgyver,mac gyver,macgiver,mac giver
 ```
 
-When your `quizz-items.csv` file is complete, you can run a little script, already configured in the `package.json` file, to generate the corresponding `quizz-items.json` file.
+> !IMPORTANT
+> Be sure to use `;` as separator
+
+When your `quizz-items.csv` file is complete, **you can run a little script**, already configured in the `package.json` file, to generate the corresponding `quizz-items.json` file.
 
 ```bash
 # At the root of the project
@@ -113,7 +116,7 @@ Now your `quizz-items.json` file looks like this:
 
 ### Add your images
 
-The next step is to add your images. In order to work without any further configuration, the following conventions must be respected:
+The next step is to add your images. In order to work without any further configuration, the following **conventions** must be respected:
 
 - The images must be located in the `public/assets/images` folder.
 - All images files must be `.jpg`.
@@ -122,11 +125,12 @@ The next step is to add your images. In order to work without any further config
 ### Customize the app
 
 > [!IMPORTANT]
-> I don't know how to use Next.js!
+> I don't know how to use Next.js! 😱
 
 The minimal customization of the quiz consists in updating the title in the home page. It is really easy:
 
-- open the `page.tsx` located in the `src/app` folder and update the text inside of the `<p>` tags:
+- open the `page.tsx` located in the `src/app` folder
+- update the text inside of the `<p>` tags:
 
 ```tsx
 import { NewGameButton } from "@/components/new-game-button";
@@ -149,18 +153,21 @@ export default function Home() {
 ```
 
 That's it! Your quiz is ready for deployment!
-You can have a look at the [deployment section](#Deployment) for deploying on GitHub Pages (free).
+
+You can have a look at the [deployment section](#deployment) for deploying on **GitHub Pages** (free).
 
 ## Interface customization
 
 You may want to customize your app more. It is of course possible:
 
-- Styles: this templates uses [Tailwind CSS](https://v3.tailwindcss.com/). See `src/app/globals.css` or `tailwind.config.ts` for configuration, and the Tailwind documentation for more details.
-- Components: this template uses [shadcn](https://ui.shadcn.com/). Please check the shadcn documentation for more details, especially the [themes page](https://ui.shadcn.com/themes) for quick update of the overall app theming: copy the provided code and replace the existing corresponding one in `src/app/globals.css`
+- **Styles**: this templates uses [Tailwind CSS](https://v3.tailwindcss.com/). See `src/app/globals.css` or `tailwind.config.ts` for configuration, and the Tailwind documentation for more details.
+- **Components**: this template uses [shadcn](https://ui.shadcn.com/). Please check the shadcn documentation for more details, especially the [themes page](https://ui.shadcn.com/themes) for quick update of the overall app theming: copy the provided code and replace the existing corresponding one in `src/app/globals.css`
 
 ## Additional features
 
-Of course, you are not limited by this template, which is only a bare bone for your fancy app! You can take advantage of the power of Next.js and React to upgrade the app and give it additional features, like bonus or progression information.
+Of course, you are not limited by this template, which is only a bare bone for your fancy app!
+
+You can take advantage of the power of Next.js and React to upgrade the app and give it additional features, like bonus or progression information.
 
 See this live example based on this template, which includes additional functionalities in the Progression page.
 
@@ -170,9 +177,10 @@ Code can be found at https://github.com/AntoineJOULIA/quizz-dessins-animes if yo
 
 ## Deployment
 
-If you want to deploy your quiz, the easiest way is to use GitHub Actions to deploy it on GitHub Pages.
-To do so, first go to github.com, on your repository page.
-Then go to the Settings tab.
+If you want to deploy your quiz, the easiest way is to use **GitHub Actions** to deploy it on [**GitHub Pages**](https://pages.github.com/).
+
+To do so, first go to **github.com**, on your **repository page**.
+Then go to the **Settings** tab.
 
 ![Step 1](./public/deployment_step-1.png)
 
@@ -180,7 +188,7 @@ Then to Pages
 
 ![Step 2](./public/deployment_step-2.png)
 
-Then choose GitHub Actions
+Then choose **GitHub Actions**
 
 ![Step 3](./public/deployment_step-3.png)
 
@@ -196,7 +204,7 @@ Now, every time you push your code to the main branch, it will be automatically 
 
 Contributions are welcome! To propose an improvement:
 
-1. Fork the project 🍴
+1. Fork the project
 2. Create a branch (`git checkout -b feature-my-feature`)
 3. Commit your changes (`git commit -m 'Add my feature'`)
 4. Push the branch (`git push origin feature-my-feature`)
@@ -208,11 +216,11 @@ This project is licensed under **GPL**. See the `LICENSE` file for more details.
 
 ## Support & Contact
 
-If you have any questions or need help, contact us via **[GitHub Issues](https://github.com/user/quiz-image-template/issues)** 😊
+If you have any questions or need help, contact us via **[GitHub Issues](https://github.com/user/quiz-image-template/issues)**
 
 # Quizz Template Internals
 
-I will paraphrase the [Redis README](https://github.com/redis/redis/blob/unstable/README.md): "if you are reading this README you are likely in front of a GitHub page. Thus, you are basically one step away from the source code, so here we explain the source code layout, what is in each file as a general idea, the most important functions and structures".
+I will paraphrase the [Redis README](https://github.com/redis/redis/blob/unstable/README.md): "_if you are reading this README you are likely in front of a GitHub page. Thus, you are basically one step away from the source code, so here we explain the source code layout, what is in each file as a general idea, the most important functions and structures_".
 
 ## General functioning
 
